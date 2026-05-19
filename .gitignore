@@ -2,6 +2,9 @@
 *.o
 *.obj
 
+# Build output dirs
+obj/
+
 # Static & shared libraries (generadas por make)
 *.a
 *.so

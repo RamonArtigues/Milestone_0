@@ -17,6 +17,8 @@ CFLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= rm -f
 
+OBJ_DIR	= obj
+
 SRCS	= ft_isalpha.c \
 		  ft_isdigit.c \
 		  ft_isalnum.c \
@@ -36,18 +38,21 @@ SRCS	= ft_isalpha.c \
 		  ft_split.c \
 		  ft_memset.c
 
-OBJS	= $(SRCS:.c=.o)
+OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-%.o: %.c libft.h
+$(OBJ_DIR)/%.o: %.c libft.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

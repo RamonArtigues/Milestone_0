@@ -3,8 +3,10 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -I..
 LIBFT	= ../libft.a
 
+OBJ_DIR	= obj
+
 SRCS	= test_libft.c
-OBJS	= $(SRCS:.c=.o)
+OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
@@ -14,14 +16,17 @@ $(NAME): $(LIBFT) $(OBJS)
 $(LIBFT):
 	$(MAKE) -C ..
 
-%.o: %.c minunit.h ../libft.h
+$(OBJ_DIR)/%.o: %.c minunit.h ../libft.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 run: all
 	./$(NAME)
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
