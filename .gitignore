@@ -1,0 +1,19 @@
+# Compiled object files
+*.o
+*.obj
+
+# Static & shared libraries (generadas por make)
+*.a
+*.so
+*.dylib
+
+# Test binary
+tests/run_tests
+
+# Editor / OS junk
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

@@ -10,14 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strnstr(char *haystack, char *needle, unsigned int len)
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	needle_len;
+	size_t	i;
+	size_t	j;
+	size_t	needle_len;
 
 	if (!needle[0])
-		return (haystack);
+		return ((char *)haystack);
 	needle_len = 0;
 	while (needle[needle_len])
 		needle_len++;
