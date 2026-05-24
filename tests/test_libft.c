@@ -335,7 +335,7 @@ static char	*test_ft_memset(void)
  *  Permitido: ninguna función externa.
  *  Bordes:    si n == 0, no hace nada. s no debe ser NULL si n > 0.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_bzero(void)
 {
 	char	buf[8];
@@ -365,7 +365,7 @@ static char	*test_ft_bzero(void)
  *             (para solapamiento usa ft_memmove).
  *             Algunos hacen: if (!dst && !src) return (NULL);
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_memcpy(void)
 {
 	char	dst[16];
@@ -393,7 +393,7 @@ static char	*test_ft_memcpy(void)
  *              hacia atrás. Así no pisas bytes que aún no has leído.
  *  Bordes:    n == 0 retorna dst sin tocar nada.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_memmove(void)
 {
 	char	buf[16];
@@ -425,7 +425,7 @@ static char	*test_ft_memmove(void)
  *             encontrar el byte 0 (256 & 0xFF == 0 sería un bug).
  *             Sí encuentra '\0' si está en los primeros n bytes.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_memchr(void)
 {
 	const char	*s = "hello\0world";
@@ -887,12 +887,14 @@ static char	*all_tests(void)
 	mu_run_test(test_ft_split);
 	mu_section("memory");
 	mu_run_test(test_ft_memset);
+	mu_run_test(test_ft_bzero);
+	mu_run_test(test_ft_memcpy);
+	mu_run_test(test_ft_memmove);
+	mu_run_test(test_ft_memchr);
 
 	/* === Descomenta cada línea cuando implementes la función === */
 	/* mu_section("pendientes - memoria");                          */
-	/* mu_run_test(test_ft_bzero);                                  */
-	/* mu_run_test(test_ft_memcpy);                                 */
-	/* mu_run_test(test_ft_memmove);                                */
+
 	/* mu_run_test(test_ft_memchr);                                 */
 	/* mu_run_test(test_ft_memcmp);                                 */
 	/* mu_run_test(test_ft_calloc);                                 */
