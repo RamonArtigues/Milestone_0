@@ -480,7 +480,7 @@ static char	*test_ft_memcmp(void)
  *  IMPORTANTE: si c == '\0', debe retornar puntero al '\0' final de s
  *              (NO NULL). Esto es una trampa típica.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_strchr(void)
 {
 	const char	*s = "hello";
@@ -892,11 +892,11 @@ static char	*all_tests(void)
 	mu_run_test(test_ft_memmove);
 	mu_run_test(test_ft_memchr);
 	mu_run_test(test_ft_memcmp);
-	
+	mu_section("strings");
+	mu_run_test(test_ft_strchr);
 	/* === Descomenta cada línea cuando implementes la función === */
 	/* mu_run_test(test_ft_calloc);                                 */
 	/* mu_section("pendientes - strings");                          */
-	/* mu_run_test(test_ft_strchr);                                 */
 	/* mu_run_test(test_ft_strrchr);                                */
 	/* mu_run_test(test_ft_strtrim);                                */
 	/* mu_run_test(test_ft_itoa);                                   */
