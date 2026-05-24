@@ -542,7 +542,7 @@ static char	*test_ft_strrchr(void)
  *             Recomendable: chequear overflow de nmemb * size.
  *  Truco:     puedes hacer malloc(nmemb*size) y luego ft_bzero/ft_memset.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_calloc(void)
 {
 	int		*arr;
@@ -577,7 +577,7 @@ static char	*test_ft_calloc(void)
  *  Bordes:    s1 entera está en set -> string vacía "".
  *             set vacío -> copia de s1 tal cual.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_strtrim(void)
 {
 	char	*r;
@@ -892,13 +892,13 @@ static char	*all_tests(void)
 	mu_run_test(test_ft_memmove);
 	mu_run_test(test_ft_memchr);
 	mu_run_test(test_ft_memcmp);
+	mu_run_test(test_ft_calloc);
 	mu_section("strings");
 	mu_run_test(test_ft_strchr);
 	mu_run_test(test_ft_strrchr);
+	mu_run_test(test_ft_strtrim);
 	/* === Descomenta cada línea cuando implementes la función === */
-	/* mu_run_test(test_ft_calloc);                                 */
 	/* mu_section("pendientes - strings");                          */
-	/* mu_run_test(test_ft_strtrim);                                */
 	/* mu_run_test(test_ft_itoa);                                   */
 	/* mu_run_test(test_ft_strmapi);                                */
 	/* mu_run_test(test_ft_striteri);                               */
