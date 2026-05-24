@@ -455,7 +455,7 @@ static char	*test_ft_memchr(void)
  *             Cast a unsigned char antes de restar: '\xff' es mayor
  *             que '\x01', no menor (con char con signo te confundirías).
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_memcmp(void)
 {
 	mu_assert("equal", ft_memcmp("abc", "abc", 3) == 0);
@@ -891,12 +891,9 @@ static char	*all_tests(void)
 	mu_run_test(test_ft_memcpy);
 	mu_run_test(test_ft_memmove);
 	mu_run_test(test_ft_memchr);
-
+	mu_run_test(test_ft_memcmp);
+	
 	/* === Descomenta cada línea cuando implementes la función === */
-	/* mu_section("pendientes - memoria");                          */
-
-	/* mu_run_test(test_ft_memchr);                                 */
-	/* mu_run_test(test_ft_memcmp);                                 */
 	/* mu_run_test(test_ft_calloc);                                 */
 	/* mu_section("pendientes - strings");                          */
 	/* mu_run_test(test_ft_strchr);                                 */

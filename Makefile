@@ -6,7 +6,7 @@
 #    By: rartigue <rartigue@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/19 00:00:00 by rartigue          #+#    #+#              #
-#    Updated: 2026/05/24 15:49:52 by rartigue         ###   ########.fr        #
+#    Updated: 2026/05/24 16:13:01 by rartigue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS	= ft_isalpha.c \
 		  ft_memcpy.c \
 		  ft_memmove.c  \
 		  ft_memchr.c	\
+		  ft_memcmp.c	\
 		  ft_bzero.c		  
 
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
