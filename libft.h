@@ -6,7 +6,7 @@
 /*   By: rartigue <rartigue@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 00:00:00 by rartigue          #+#    #+#             */
-/*   Updated: 2026/05/24 16:34:49 by rartigue         ###   ########.fr       */
+/*   Updated: 2026/05/24 16:39:24 by rartigue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /* ----- strings ----- */
 char	*ft_strchr(const char *s, int c);
+char	*ft_strrchr(const char *s, int c);
 
 #endif

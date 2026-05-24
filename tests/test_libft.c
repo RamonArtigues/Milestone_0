@@ -509,7 +509,7 @@ static char	*test_ft_strchr(void)
  *  Estrategia: recorrer hasta el final y luego volver hacia atrás,
  *              o recorrer todo guardando la última posición.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_strrchr(void)
 {
 	const char	*s = "hello";
@@ -894,10 +894,10 @@ static char	*all_tests(void)
 	mu_run_test(test_ft_memcmp);
 	mu_section("strings");
 	mu_run_test(test_ft_strchr);
+	mu_run_test(test_ft_strrchr);
 	/* === Descomenta cada línea cuando implementes la función === */
 	/* mu_run_test(test_ft_calloc);                                 */
 	/* mu_section("pendientes - strings");                          */
-	/* mu_run_test(test_ft_strrchr);                                */
 	/* mu_run_test(test_ft_strtrim);                                */
 	/* mu_run_test(test_ft_itoa);                                   */
 	/* mu_run_test(test_ft_strmapi);                                */
