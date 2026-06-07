@@ -6,48 +6,48 @@
 /*   By: rartigue <rartigue@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:13:19 by rartigue          #+#    #+#             */
-/*   Updated: 2026/05/24 15:43:32 by rartigue         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:45:00 by rartigue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_copy(void *dst, const void *src, size_t n);
+/* Copia de izquierda a derecha cuando aún no hay riesgo de pisar datos. */
+static void	copy_forward(unsigned char *dst, const unsigned char *src, size_t n)
+{
+	while (n > 0)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+		n--;
+	}
+}
 
+/* Copia desde el final cuando origen y destino se solapan. */
+static void	copy_backward(unsigned char *dst,
+			const unsigned char *src, size_t n)
+{
+	while (n > 0)
+	{
+		dst[n - 1] = src[n - 1];
+		n--;
+	}
+}
+
+/* Hace una copia segura incluso cuando src y dst se pisan entre sí. */
 void	*ft_memmove(void *dst, const void *src, size_t n)
 {
+	unsigned char		*dest;
+	const unsigned char	*sour;
 
 	if (!dst && !src)
 		return (NULL);
-	if (dst == src)
-		return (dst);
-	ft_copy(dst, src, n);
-	return (dst);
-}
-
-void	ft_copy(void *dst, const void *src, size_t n)
-{
-	unsigned char	*dest;
-	unsigned char	*sour;
-
 	dest = (unsigned char *)dst;
-	sour = (unsigned char *)src;
-	if (dst < src)
-	{
-		while (n > 0)
-		{
-			*dest = *sour;
-			dest++;
-			sour++;
-			n--;
-		}
-	}
+	sour = (const unsigned char *)src;
+	if (dest < sour)
+		copy_forward(dest, sour, n);
 	else
-	{
-		while (n > 0)
-		{
-			dest[n - 1] = sour[n - 1];
-			n--;
-		}
-	}
+		copy_backward(dest, sour, n);
+	return (dst);
 }

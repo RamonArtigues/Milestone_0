@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Quita del principio y del final todos los caracteres que aparezcan en set.
+** Lo del centro no se toca: solo recorta los bordes.
+*/
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	start;

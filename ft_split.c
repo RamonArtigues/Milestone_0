@@ -6,12 +6,13 @@
 /*   By: rartigue <rartigue@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 00:00:00 by rartigue          #+#    #+#             */
-/*   Updated: 2026/05/18 00:00:00 by rartigue         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:45:00 by rartigue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/* Cuenta cuántas palabras reales hay antes de reservar memoria. */
 static int	count_words(char const *s, char c)
 {
 	int	count;
@@ -33,16 +34,30 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-static int	word_len(char const *s, char c)
+/* Reserva y copia una sola palabra hasta el siguiente separador. */
+static char	*dup_word(char const *s, char c)
 {
-	int	len;
+	char	*word;
+	int		len;
+	int		i;
 
 	len = 0;
 	while (s[len] && s[len] != c)
 		len++;
-	return (len);
+	word = (char *)malloc(len + 1);
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = '\0';
+	return (word);
 }
 
+/* Limpia lo ya reservado si algo falla a mitad del proceso. */
 static void	free_result(char **result, int count)
 {
 	while (count > 0)
@@ -53,40 +68,42 @@ static void	free_result(char **result, int count)
 	free(result);
 }
 
+/* Recorre la cadena y va guardando cada palabra en el array final. */
+static int	fill_result(char **result, char const *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s)
+		{
+			result[i] = dup_word(s, c);
+			if (!result[i++])
+				return (free_result(result, i - 1), 0);
+			while (*s && *s != c)
+				s++;
+		}
+	}
+	result[i] = NULL;
+	return (1);
+}
+
+/* Divide una string en varias subcadenas independientes. */
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	int		words;
-	int		i;
-	int		len;
-	int		j;
 
+	if (!s)
+		return (NULL);
 	words = count_words(s, c);
 	result = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!result)
 		return (NULL);
-	i = 0;
-	while (i < words)
-	{
-		while (*s == c)
-			s++;
-		len = word_len(s, c);
-		result[i] = (char *)malloc(len + 1);
-		if (!result[i])
-		{
-			free_result(result, i);
-			return (NULL);
-		}
-		j = 0;
-		while (j < len)
-		{
-			result[i][j] = s[j];
-			j++;
-		}
-		result[i][j] = '\0';
-		s += len;
-		i++;
-	}
-	result[i] = NULL;
+	if (!fill_result(result, s, c))
+		return (NULL);
 	return (result);
 }

@@ -6,40 +6,45 @@
 /*   By: rartigue <rartigue@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 00:00:00 by rartigue          #+#    #+#             */
-/*   Updated: 2026/05/18 00:00:00 by rartigue         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:45:00 by rartigue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static void	fill_join(char *result, char const *s1, char const *s2)
 {
-	char			*result;
-	unsigned int	len1;
-	unsigned int	len2;
-	unsigned int	i;
+	size_t	i;
+	size_t	j;
 
-	len1 = 0;
-	len2 = 0;
-	while (s1[len1])
-		len1++;
-	while (s2[len2])
-		len2++;
-	result = (char *)malloc(len1 + len2 + 1);
-	if (!result)
-		return (NULL);
 	i = 0;
-	while (i < len1)
+	while (s1[i])
 	{
 		result[i] = s1[i];
 		i++;
 	}
-	i = 0;
-	while (i < len2)
+	j = 0;
+	while (s2[j])
 	{
-		result[len1 + i] = s2[i];
-		i++;
+		result[i + j] = s2[j];
+		j++;
 	}
-	result[len1 + len2] = '\0';
+	result[i + j] = '\0';
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*result;
+	size_t	len1;
+	size_t	len2;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = (char *)malloc(len1 + len2 + 1);
+	if (!result)
+		return (NULL);
+	fill_join(result, s1, s2);
 	return (result);
 }

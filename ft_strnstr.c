@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Busca una subcadena dentro de otra, pero solo dentro de los primeros
+** 'len' caracteres del texto original.
+*/
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;

@@ -2,13 +2,9 @@
  *
  * Convención: cada test devuelve NULL si pasa, o un mensaje de error si falla.
  *
- * Para activar un test de una función pendiente:
- *   1. Implementa la función en la raíz (ft_X.c), añade su prototipo a libft.h
- *      y añádela a SRCS del Makefile.
- *   2. Localiza abajo el bloque de tu función bajo "TESTS PENDIENTES".
- *   3. Cambia el "#if 0" por "#if 1" (o elimina los guards #if/#endif).
- *   4. Descomenta la línea "mu_run_test(test_ft_X);" dentro de all_tests().
- *   5. cd tests && make re run
+ * Este archivo puede usarse como batería de tests de libft.
+ * Si añades funciones nuevas, añade aquí su test y ejecútalo con:
+ *   cd tests && make re run
  */
 
 #include "minunit.h"
@@ -315,13 +311,10 @@ static char	*test_ft_memset(void)
  *                      TESTS PENDIENTES
  *  ====================================================================
  *
- *  Cada bloque de abajo está rodeado de "#if 0 ... #endif" para que el
- *  archivo siga compilando aunque la función no exista todavía.
- *
- *  Cuando implementes la función:
- *    1) cambia el "#if 0" por "#if 1" (o quita los gates)
- *    2) descomenta la línea correspondiente en all_tests() al final
- *    3) "cd tests && make re run"
+ *  Estos tests estaban preparados para activarse poco a poco.
+ *  Ahora mismo los básicos ya están activos para poder verificar toda la
+ *  parte obligatoria de una vez con:
+ *    "cd tests && make re run"
  * ========================================================================= */
 
 /* -------------------------------------------------------------------------
@@ -614,7 +607,7 @@ static char	*test_ft_strtrim(void)
  *                  Truco: gestionar n == INT_MIN como caso especial
  *                  o trabajar con n como unsigned/long.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_itoa(void)
 {
 	char	*r;
@@ -650,7 +643,7 @@ static char	*test_ft_itoa(void)
  *  Permitido: malloc.
  *  Bordes:    s == "" -> retorna "" (string vacía malloc'd, no NULL).
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	upper_at_even(unsigned int i, char c)
 {
 	if (i % 2 == 0 && c >= 'a' && c <= 'z')
@@ -683,7 +676,7 @@ static char	*test_ft_strmapi(void)
  *  Permitido: ninguna.
  *  Diferencia con strmapi: NO crea string nueva, modifica la existente.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static void	mark_even(unsigned int i, char *c)
 {
 	if (i % 2 == 0)
@@ -711,11 +704,11 @@ static char	*test_ft_striteri(void)
  *  cerramos ese extremo, leemos el de lectura, y comparamos.
  * ========================================================================= */
 
-/* helper común para los 4 tests fd. Lo dejamos fuera del #if 0 para que
+/* helper común para los 4 tests fd. Lo dejamos fuera del #if 1 para que
  * esté disponible aunque actives solo uno. Si todo está apagado, el
  * compilador puede quejarse por función no usada con -Wunused-function;
  * por eso también lo gateamos. */
-#if 0
+#if 1
 static int	pipe_capture_begin(int pipefd[2])
 {
 	if (pipe(pipefd) == -1)
@@ -747,7 +740,7 @@ static int	pipe_capture_end(int pipefd[2], char *buf, size_t bufsize)
  *  Permitido: write (incluir <unistd.h>).
  *  Detalle:   write(fd, &c, 1);
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_putchar_fd(void)
 {
 	int		pfd[2];
@@ -773,7 +766,7 @@ static char	*test_ft_putchar_fd(void)
  *             Cuidado con s == NULL: comportamiento indefinido por el
  *             subject, pero conviene no segfaultear.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_putstr_fd(void)
 {
 	int		pfd[2];
@@ -799,7 +792,7 @@ static char	*test_ft_putstr_fd(void)
  *  Qué hace:  Como putstr_fd pero añade '\n' al final.
  *  Permitido: write.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_putendl_fd(void)
 {
 	int		pfd[2];
@@ -827,7 +820,7 @@ static char	*test_ft_putendl_fd(void)
  *  Recursivo: la mayoría hace ft_putnbr_fd(n / 10, fd) + putchar del dígito.
  *             Cuidado con el signo: gestiona '-' una sola vez al principio.
  * ------------------------------------------------------------------------- */
-#if 0
+#if 1
 static char	*test_ft_putnbr_fd(void)
 {
 	int		pfd[2];
@@ -897,20 +890,20 @@ static char	*all_tests(void)
 	mu_run_test(test_ft_strchr);
 	mu_run_test(test_ft_strrchr);
 	mu_run_test(test_ft_strtrim);
-	/* === Descomenta cada línea cuando implementes la función === */
-	/* mu_section("pendientes - strings");                          */
-	/* mu_run_test(test_ft_itoa);                                   */
-	/* mu_run_test(test_ft_strmapi);                                */
-	/* mu_run_test(test_ft_striteri);                               */
-	/* mu_section("pendientes - file descriptors");                 */
-	/* mu_run_test(test_ft_putchar_fd);                             */
-	/* mu_run_test(test_ft_putstr_fd);                              */
-	/* mu_run_test(test_ft_putendl_fd);                             */
-	/* mu_run_test(test_ft_putnbr_fd);                              */
+	mu_section("strings adicionales");
+	mu_run_test(test_ft_itoa);
+	mu_run_test(test_ft_strmapi);
+	mu_run_test(test_ft_striteri);
+	mu_section("file descriptors");
+	mu_run_test(test_ft_putchar_fd);
+	mu_run_test(test_ft_putstr_fd);
+	mu_run_test(test_ft_putendl_fd);
+	mu_run_test(test_ft_putnbr_fd);
 
 	return (NULL);
 }
 
+/*
 int	main(void)
 {
 	all_tests();
@@ -922,3 +915,4 @@ int	main(void)
 		printf("\033[31m%d TEST(S) FAILED\033[0m\n", g_tests_failed);
 	return (g_tests_failed != 0);
 }
+*/
